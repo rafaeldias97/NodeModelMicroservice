@@ -17,9 +17,9 @@ topicGenerator.generate(kafka)
         await consumer.run({
             eachMessage: async ({ topic, partition, message }) => {
                 let msg = JSON.parse(message.value.toString());
-                console.log('topic: ', topic)
-                console.log('partition: ', partition)
-                console.log('message: ', msg)
+                // console.log('topic: ', topic)
+                // console.log('partition: ', partition)
+                // console.log(msg)
                 transactions(kafka, msg)
             },
         })

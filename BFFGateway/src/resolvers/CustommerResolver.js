@@ -32,6 +32,7 @@ const resolvers = {
     addCustommer: (parent, args) => {
       message = {
         topic: 'CREATE_CUSTOMER',
+        type: 'CREATE_CUSTOMER',
         data: args
       }
       Publisher({ 

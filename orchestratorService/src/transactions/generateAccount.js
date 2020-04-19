@@ -2,7 +2,6 @@ const Publisher = require('../boot/Publisher')
 module.exports = (message, kafka) => {
     switch (message.type) {
         case "CREATE_CUSTOMER":
-            console.log(JSON.parse(message.data))
             Publisher({
                 kafka: kafka,
                 topic: 'EXECUTE_CREATE_CUSTOMER',

@@ -1,6 +1,6 @@
 const generateAccount = require('./generateAccount');
 
-module.exports = (message, kafka) => {
+module.exports = (kafka, message) => {
     switch (message.topic) {
         case 'CREATE_CUSTOMER':
             generateAccount(message, kafka);
