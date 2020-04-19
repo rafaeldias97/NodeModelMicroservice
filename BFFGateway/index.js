@@ -1,42 +1,18 @@
-const { ApolloServer, gql } = require('apollo-server');
-const uuid = require('uuid/v4');
-
-const typeDefs = gql`
-  type Quote {
-    id: ID!
-    phrase: String!
-    quotee: String
-  }
-
-  type Query {
-    quotes: [Quote]
-  }
-`;
-
-const quotes = {};
-const addQuote = quote => {
-  const id = uuid();
-  return quotes[id] = { ...quote, id };
-};
-
-// Start with a few initial quotes
-addQuote({ phrase: "I'm a leaf on the wind. Watch how I soar.", quotee: "Wash" });
-addQuote({ phrase: "We're all stories in the end.", quotee: "The Doctor" });
-addQuote({ phrase: "Woah!", quotee: "Neo" });
-
-const resolvers = {
-  Query: {
-    quotes: () => Object.values(quotes),
-  },
-};
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const { ApolloServer } = require('apollo-server-express');
+const routes = require('./src/routes')
+const resolvers = require('./src/resolvers')
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  introspection: true,
-  playground: true,
+  typeDefs: routes,
+  resolvers: resolvers.custommerResolver
 });
+const app = express();
+app.use(bodyParser.json());
+app.use('*', cors());
+server.applyMiddleware({ app });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`); // eslint-disable-line no-console
-});
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`));
