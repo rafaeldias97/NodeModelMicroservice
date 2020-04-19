@@ -1,3 +1,11 @@
+const { Kafka, logLevel } = require('kafkajs')
+const Publisher = require('../boot/Publisher')
+const kafka = new Kafka({
+  clientId: 'orchestrator',
+  brokers: ['localhost:9092'],
+  logLevel: logLevel.ERROR,
+})
+
 const resolvers = {
   Query: {
     getCustommers: (parent, args) => {
@@ -22,13 +30,16 @@ const resolvers = {
   },
   Mutation: {
     addCustommer: (parent, args) => {
-      // let Movie = new Movie({
-      //   name: args.name,
-      //   producer: args.producer,
-      //   rating: args.rating,
-      // });
-      // return Movie.save();
-      return ''
+      message = {
+        topic: 'CREATE_CUSTOMER',
+        data: args
+      }
+      Publisher({ 
+        kafka: kafka,
+        topic: 'ORCHESTRATOR',
+        value: JSON.stringify(message)
+      })
+      return args
     },
     updateCustommer: (parent, args) => {
       if (!args.id) return;
