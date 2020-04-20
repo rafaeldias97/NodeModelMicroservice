@@ -4,11 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest"
   },
   "dependencies": {
     "kafkajs": "^1.12.0",
     "mongoose": "^5.9.9",
     "nodemon": "^2.0.3"
+  },
+  "devDependencies": {
+    "jest": "^25.4.0"
   }
 }
