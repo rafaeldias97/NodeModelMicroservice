@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
-const routes = require('./src/routes')
-const resolvers = require('./src/resolvers')
+const routes = require('./src/routes');
+const resolvers = require('./src/resolvers');
 
 const server = new ApolloServer({
   typeDefs: routes,

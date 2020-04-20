@@ -1,7 +1,7 @@
 const typeDefs = `
   type Custommer {
     id: ID
-    status: Boolean
+    status: String
     fullName: String!
     accountId: String
   }

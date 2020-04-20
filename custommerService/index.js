@@ -1,6 +1,9 @@
 const { Kafka, logLevel } = require('kafkajs');
 // const transactions = require('./transactions');
 const createCustommer = require('./src/queue/createCustommer');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/custommer', { useNewUrlParser: true });
+const db = mongoose.connection;
 
 const kafka = new Kafka({
     clientId: 'custommer-service',
@@ -8,7 +11,11 @@ const kafka = new Kafka({
     logLevel: logLevel.ERROR,
 });
 
-createCustommer.setKafka(kafka).run();
+db.on('open', () => {
+    createCustommer.setKafka(kafka).run();
+});
+
+db.on('error', console.error.bind(console, 'connection error:'));
 
 // Gera os topicos
 // topicGenerator.generate(kafka)
