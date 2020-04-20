@@ -2,7 +2,7 @@ const { Kafka, logLevel } = require('kafkajs');
 // const transactions = require('./transactions');
 const createCustommer = require('./src/queue/createCustommer');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/custommer', { useNewUrlParser: true });
+mongoose.connect('mongodb://root:MongoDB2019!@localhost', { useNewUrlParser: true });
 const db = mongoose.connection;
 
 const kafka = new Kafka({

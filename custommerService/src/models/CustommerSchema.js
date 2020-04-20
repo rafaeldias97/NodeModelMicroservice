@@ -5,6 +5,8 @@ const CustommerSchema = new mongoose.Schema({
     status: String,
     fullName: String,
     accountId: String,
+    userLogin: String,
+    userPassword: String,
     error: Object
 });
 

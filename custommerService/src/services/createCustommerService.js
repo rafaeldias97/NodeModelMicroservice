@@ -1,13 +1,11 @@
 const Custommer = require('../models/CustommerSchema');
 module.exports = async (msg) => {
     try {
-        // console.log(msg);
-        // let obj = new Custommer(msg.data);
-        // let val = await obj.validateSync();
-        // console.log('validade ', val)
-        // let res = await obj.save()
-        // console.log('result create ', res)
-        // throw new Error(JSON.stringify(msg))
+        let obj = new Custommer(msg);
+        // console.log(obj);
+        let val = obj.validateSync();
+        if (val) throw new Error(JSON.stringify(msg))
+        return await obj.save();
     } catch(e) {
         console.error(e);
         throw new Error(e.message);

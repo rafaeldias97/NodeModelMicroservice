@@ -18,7 +18,7 @@ class CreateCustommer {
         let msg = JSON.parse(message.value.toString());
         // console.log('topic: ', topic)
         // console.log('partition: ', partition)
-        console.log('message: ', msg)
+        // console.log('message: ', msg)
         try {
           await createCustommerService(msg)
         } catch (e) {
