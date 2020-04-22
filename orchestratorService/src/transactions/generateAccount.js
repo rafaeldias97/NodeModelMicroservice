@@ -9,19 +9,18 @@ module.exports = (message, kafka) => {
             });
             break;
         case "CREATE_CUSTOMER_COMPLETED":
-            console.log(JSON.parse(message.data))
-            Publisher({ 
+            Publisher({
                 kafka: kafka,
                 topic: 'EXECUTE_CREATE_ACCOUNT',
-                value: message.data
+                value: JSON.stringify(message.data)
             });
             break;
         case "CREATE_ACCOUNT_COMPLETED":
-            console.log(JSON.parse(message.data))
+            console.log(message.data)
             Publisher({ 
                 kafka: kafka,
                 topic: 'CREATE_CUSTOMER_CONCLUDED',
-                value: message.data
+                value: JSON.stringify(message.data)
             });
             break;
         default:

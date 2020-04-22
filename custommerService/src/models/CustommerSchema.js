@@ -4,10 +4,8 @@ const CustommerSchema = new mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     status: String,
     fullName: String,
-    accountId: String,
     userLogin: String,
-    userPassword: String,
-    error: Object
+    userPassword: String
 });
 
 module.exports = mongoose.model('Custommer', CustommerSchema);
